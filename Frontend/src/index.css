@@ -5,6 +5,9 @@
 @plugin 'daisyui';
 
 @theme {
+  /* Custom breakpoint for 4K screens */
+  --breakpoint-3xl: 2560px;
+
   /* Custom scale values */
   --scale-40: 0.4;
   --scale-50: 0.5;
