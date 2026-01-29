@@ -1,5 +1,25 @@
 import axios from 'axios';
 
+/**
+ * Fetch Pokemon cry/sound from PokeAPI
+ * Returns an object with 'latest' and 'legacy' cry URLs
+ */
+export const GetPokemonCry = async (pokemonId) => {
+  try {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+    const data = response.data;
+
+    // PokeAPI v2.9.0+ includes cries
+    return {
+      latest: data.cries?.latest || null,
+      legacy: data.cries?.legacy || null,
+    };
+  } catch (error) {
+    console.error(`Error fetching pokemon cry: ${error}`);
+    return { latest: null, legacy: null };
+  }
+};
+
 export const GetPokemonImage = async (pokemonId) => {
   try {
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
