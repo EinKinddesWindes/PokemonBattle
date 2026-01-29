@@ -6,7 +6,7 @@ A Pokémon battle game where you pick your fighter, spam the attack button, and 
 
 **[Play PokeBattler](https://pokebattler.netlify.app/)**
 
-*Note: The backend is hosted on Render's free tier, so the first load might take ~30 seconds while Pikachu wakes up the server.*
+_Note: The backend is hosted on Render's free tier, so the first load might take ~30 seconds while Pikachu wakes up the server._
 
 ## Video Showcase
 
@@ -36,7 +36,7 @@ Works with npm/pnpm too if you're old school.
 
 ## Project Structure
 
-```
+```txt
 Backend/
 ├── controllers/   # Handles the requests
 ├── routes/        # API endpoints
@@ -48,14 +48,3 @@ Frontend/
 ├── components/    # Pokemon cards, images
 └── context/       # Global state (who's fighting who)
 ```
-
-## How It Works
-
-1. Enter your trainer name
-2. Pick a Pokémon (or get a random one)
-3. Pick an opponent (or get a random one)  
-4. Mash that Attack button
-5. Watch HP bars go down
-6. Confetti if you win
-
-That's it. It's not complicated. It's Pokémon.
