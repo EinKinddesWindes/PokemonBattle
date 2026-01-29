@@ -131,7 +131,7 @@ function Arena() {
         {/* Fight Button */}
         <button
           onClick={startBattle}
-          className="btn btn-primary font-pixel absolute bottom-[12%] left-[50%] -translate-x-[50%] transform border-4 border-black bg-red-500 px-16 py-8 text-4xl whitespace-nowrap text-white shadow-lg">
+          className="btn font-pixel absolute bottom-[12%] left-[50%] -translate-x-[50%] transform rounded-none border-4 border-white bg-red-500 px-16 py-8 text-4xl whitespace-nowrap text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-100 [clip-path:polygon(0_8px,8px_8px,8px_0,calc(100%-8px)_0,calc(100%-8px)_8px,100%_8px,100%_calc(100%-8px),calc(100%-8px)_calc(100%-8px),calc(100%-8px)_100%,8px_100%,8px_calc(100%-8px),0_calc(100%-8px))] hover:scale-105 hover:brightness-125 hover:border-yellow-300 hover:shadow-[0_0_0_4px_rgba(0,0,0,1),0_0_20px_rgba(255,255,100,0.6)] active:scale-100 active:brightness-90 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
           <div className="flex h-full w-full items-center justify-center">Fight!</div>
         </button>
       </div>
