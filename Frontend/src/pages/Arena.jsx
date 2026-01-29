@@ -66,20 +66,27 @@ export default function Arena() {
     <div
       className="fixed inset-0 overflow-auto bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${Stadium})` }}>
-      {/* Pokemon GIFs - Fixed position relative to viewport/background */}
-      <div className="pointer-events-none fixed inset-0">
-        {/* Opponent's Pokemon (front view) - top right of arena */}
-        <div className="absolute" style={{ top: '38%', right: '38%' }}>
-          {frontGif && (
-            <img src={frontGif} alt="Opponent Pokemon" className="h-16 w-auto object-contain sm:h-20 md:h-24 lg:h-28" />
-          )}
-        </div>
+      {/* Pokemon GIFs - Centered container that maintains aspect ratio for consistent positioning */}
+      <div className="pointer-events-none fixed inset-0 flex items-center justify-center">
+        {/* Container matching background aspect ratio - GIFs positioned relative to this */}
+        <div className="relative h-full max-h-screen w-full max-w-[177.78vh]" style={{ aspectRatio: '16 / 9' }}>
+          {/* Opponent's Pokemon (front view) - top right of arena */}
+          <div className="absolute top-[44%] right-[38%] -translate-y-1/2 2xl:top-[46%]">
+            {frontGif && (
+              <img
+                src={frontGif}
+                alt="Opponent Pokemon"
+                className="h-16 w-auto object-contain sm:h-20 md:h-24 lg:h-28"
+              />
+            )}
+          </div>
 
-        {/* Player's Pokemon (back view) - bottom left of arena */}
-        <div className="absolute" style={{ top: '48%', left: '38%' }}>
-          {backGif && (
-            <img src={backGif} alt="Your Pokemon" className="h-24 w-auto object-contain sm:h-28 md:h-32 lg:h-36" />
-          )}
+          {/* Player's Pokemon (back view) - bottom left of arena */}
+          <div className="absolute top-[54%] left-[38%] -translate-y-1/2 2xl:top-[56%]">
+            {backGif && (
+              <img src={backGif} alt="Your Pokemon" className="h-24 w-auto object-contain sm:h-28 md:h-32 lg:h-36" />
+            )}
+          </div>
         </div>
       </div>
 
@@ -95,7 +102,7 @@ export default function Arena() {
         {/* Main Arena Content */}
         <main className="flex flex-1 flex-col gap-4 lg:gap-6">
           {/* Pokemon Selection Row - stacks on mobile, side by side on desktop */}
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
+          <div className="3xl:mt-24 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
             {/* Player's Pokemon Section */}
             <section className="flex flex-col items-center">
               <div className="mb-2 flex flex-wrap justify-center gap-2">

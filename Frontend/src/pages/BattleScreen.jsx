@@ -52,7 +52,7 @@ export default function BattleScreen() {
   const playCry = (audioRef, cryUrl) => {
     if (audioRef.current && cryUrl) {
       audioRef.current.src = cryUrl;
-      audioRef.current.volume = 0.04;
+      audioRef.current.volume = 0.015;
       audioRef.current.play().catch(() => {
         // Ignore autoplay errors
       });
@@ -231,18 +231,18 @@ export default function BattleScreen() {
         {/* Main Battle Area */}
         <main className="flex flex-1 flex-col">
           {/* Battle Grid - Cards on sides, battlefield in center */}
-          <div className="grid flex-1 grid-cols-1 gap-2 lg:grid-cols-[1fr_2fr_1fr]">
+          <div className="grid flex-1 grid-cols-1 gap-2 lg:grid-cols-[0.6fr_2fr_0.6fr] lg:px-16 xl:px-28 2xl:px-40">
             {/* Player's Card - Left side (hidden on mobile) */}
             <div className="hidden items-center justify-center lg:flex">
               <PokemonCard pokemonId={playerPokemon.id} size="md" showStats={false} />
             </div>
 
-            {/* Battlefield - Center with 3D perspective positioning (same as Arena) */}
+            {/* Battlefield - Center */}
             <div className="relative flex flex-1 items-center justify-center">
-              {/* Fixed aspect-ratio container for consistent GIF positioning - matches Arena */}
+              {/* Fixed aspect-ratio container for consistent GIF positioning */}
               <div className="relative w-full max-w-md overflow-visible" style={{ aspectRatio: '16 / 10' }}>
                 {/* Opponent's Pokemon - indicator, HP, GIF */}
-                <div className="absolute flex flex-col items-center" style={{ top: '-28%', right: '5%' }}>
+                <div className="absolute flex flex-col items-center" style={{ top: '-28%', right: '-10%' }}>
                   {/* Turn indicator - bigger */}
                   <div
                     className={`flex h-20 items-center justify-center sm:h-24 md:h-28 lg:h-32 ${currentTurn === 'opponent' ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
@@ -270,7 +270,7 @@ export default function BattleScreen() {
                 </div>
 
                 {/* Player's Pokemon - indicator, HP, GIF */}
-                <div className="absolute flex flex-col items-center" style={{ top: '0%', left: '5%' }}>
+                <div className="absolute flex flex-col items-center" style={{ top: '0%', left: '-10%' }}>
                   {/* Turn indicator - bigger */}
                   <div
                     className={`flex h-20 items-center justify-center sm:h-24 md:h-28 lg:h-32 ${currentTurn === 'player' ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>

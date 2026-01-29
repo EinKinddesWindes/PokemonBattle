@@ -51,7 +51,7 @@ export default function PokemonCard({ pokemonId, onClick, size = 'md', showStats
       hoverTimeoutRef.current = setTimeout(() => {
         if (audioRef.current && pokemonCry) {
           audioRef.current.src = pokemonCry;
-          audioRef.current.volume = 0.04;
+          audioRef.current.volume = 0.015;
           audioRef.current.play().catch(() => {
             // Ignore autoplay errors
           });
