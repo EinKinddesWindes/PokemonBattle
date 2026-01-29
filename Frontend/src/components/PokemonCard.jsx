@@ -72,7 +72,7 @@ export default function PokemonCard({ pokemonId, onClick, size = 'md', showStats
   if (!pokemon || !pokemonImage) {
     return (
       <div className="w-full p-2 sm:p-4">
-        <div className="mx-auto flex w-full max-w-[280px] flex-col gap-3 rounded-3xl bg-amber-100/50 p-4 sm:gap-5">
+        <div className="mx-auto flex w-full max-w-70 flex-col gap-3 rounded-3xl bg-amber-100/50 p-4 sm:gap-5">
           <div className="skeleton mx-auto aspect-square w-24 rounded-full sm:w-32 md:w-40" />
           <div className="skeleton mx-auto h-4 w-24 sm:w-28" />
           <div className="skeleton mx-auto h-4 w-full" />

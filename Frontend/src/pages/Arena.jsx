@@ -110,7 +110,7 @@ export default function Arena() {
             </section>
 
             {/* Spacer for center - GIFs are now fixed positioned */}
-            <section className="order-first hidden lg:order-none lg:block" />
+            <section className="order-first hidden lg:order-0 lg:block" />
 
             {/* Opponent's Pokemon Section */}
             <section className="flex flex-col items-center">

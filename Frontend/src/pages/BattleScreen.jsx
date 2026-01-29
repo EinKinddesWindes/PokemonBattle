@@ -357,13 +357,13 @@ export default function BattleScreen() {
               <div className="relative w-full max-w-sm animate-[slide-up_0.5s_ease-out] sm:max-w-md">
                 {/* Decorative top banner */}
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 transform">
-                  <div className="rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 px-8 py-2 shadow-lg">
+                  <div className="rounded-full bg-linear-to-r from-yellow-400 via-orange-500 to-red-500 px-8 py-2 shadow-lg">
                     <span className="font-pixel text-sm text-white drop-shadow-lg sm:text-base">VICTORY!</span>
                   </div>
                 </div>
 
                 {/* Main card */}
-                <div className="overflow-hidden rounded-3xl border-4 border-yellow-400 bg-gradient-to-b from-slate-800 via-slate-900 to-black p-6 shadow-[0_0_60px_rgba(255,215,0,0.3)] sm:p-8">
+                <div className="overflow-hidden rounded-3xl border-4 border-yellow-400 bg-linear-to-b from-slate-800 via-slate-900 to-black p-6 shadow-[0_0_60px_rgba(255,215,0,0.3)] sm:p-8">
                   {/* Trophy/Winner image with glow */}
                   <div className="relative mx-auto mb-4 w-fit">
                     <div className="absolute inset-0 animate-pulse rounded-full bg-yellow-400/30 blur-xl" />
@@ -375,14 +375,14 @@ export default function BattleScreen() {
                   </div>
 
                   {/* Winner name with golden text */}
-                  <h2 className="mb-2 bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 bg-clip-text text-center text-2xl font-extrabold text-transparent sm:text-3xl md:text-4xl">
+                  <h2 className="mb-2 bg-linear-to-r from-yellow-300 via-yellow-400 to-orange-400 bg-clip-text text-center text-2xl font-extrabold text-transparent sm:text-3xl md:text-4xl">
                     {winner}
                   </h2>
                   <p className="mb-4 text-center text-lg font-bold text-yellow-400 sm:text-xl">WINS THE BATTLE!</p>
 
                   {/* Pokemon showcase with spotlight effect */}
                   <div className="relative my-6 flex justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-t from-yellow-400/10 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-yellow-400/10 to-transparent" />
                     <div className="relative">
                       <div className="absolute -inset-4 animate-pulse rounded-full bg-yellow-400/20 blur-lg" />
                       <img
@@ -396,9 +396,9 @@ export default function BattleScreen() {
                   {/* Fancy button */}
                   <button
                     onClick={returnToArena}
-                    className="group relative w-full cursor-pointer overflow-hidden rounded-xl bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,165,0,0.5)] sm:text-xl">
+                    className="group relative w-full cursor-pointer overflow-hidden rounded-xl bg-linear-to-r from-yellow-400 via-orange-500 to-red-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,165,0,0.5)] sm:text-xl">
                     <span className="relative z-10">Back to Arena</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-linear-to-r from-yellow-300 via-orange-400 to-red-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   </button>
                 </div>
 
