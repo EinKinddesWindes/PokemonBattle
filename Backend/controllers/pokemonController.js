@@ -1,4 +1,4 @@
-import pokemonData from '../pokemondata.json' assert { type: 'json' };
+import pokemonData from '../pokemondata.json' with { type: 'json' };
 
 const getAllPokemon = (req, res) => {
   res.send(pokemonData);

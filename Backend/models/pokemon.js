@@ -19,5 +19,5 @@ const pokemonData = {
 };
 
 export const getAllPokemon = (id) => {
-  return pokemondata[id];
+  return pokemonData[id];
 };

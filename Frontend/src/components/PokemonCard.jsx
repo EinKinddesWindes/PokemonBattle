@@ -95,7 +95,7 @@ const PokemonCard = ({ pokemonId, onClick }) => {
 
   return (
     <div onClick={onClick} className="w-full p-4 md:w-1/2 lg:w-1/4">
-      <div className="card relative w-64 max-w-xs rounded-3xl border-2 border-gray-400 bg-gradient-to-br from-[#e8d5b7] via-[#e3c6a0] to-[#e3b47b] shadow-lg transition-transform hover:scale-105 hover:shadow-2xl">
+      <div className="card relative w-64 max-w-xs rounded-3xl border-2 border-gray-400 bg-linear-to-br from-[#e8d5b7] via-[#e3c6a0] to-[#e3b47b] shadow-lg transition-transform hover:scale-105 hover:shadow-2xl">
         {/* Pokemon Image */}
         <div className="flex justify-center pt-6">
           <div className="h-40 w-40 rounded-full bg-white shadow-inner">

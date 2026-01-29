@@ -1,5 +1,5 @@
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 import pokemonRoutes from './routes/pokemonRoutes.js';
 
 const app = express();
