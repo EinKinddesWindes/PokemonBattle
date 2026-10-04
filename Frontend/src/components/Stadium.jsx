@@ -48,12 +48,6 @@ export default function Stadium({
         </div>
       </div>
 
-      <img
-        src={AshKetchum}
-        alt="Ash Ketchum"
-        className="pointer-events-none absolute bottom-0 left-[3%] h-[32%] portrait:hidden"
-      />
-
       <div className="relative mx-auto flex h-full max-w-[178vh] flex-col gap-4 p-6">
         <header className="flex justify-center">{header}</header>
 
@@ -68,7 +62,17 @@ export default function Stadium({
           </section>
         </main>
 
-        <footer className="flex justify-center">{footer}</footer>
+        <footer className="flex justify-center">
+          {/* Ash stands right next to the button, on the bottom edge of the screen */}
+          <div className="relative">
+            <img
+              src={AshKetchum}
+              alt="Ash Ketchum"
+              className="pointer-events-none absolute right-full -bottom-6 -mr-16 h-72 max-w-none portrait:hidden"
+            />
+            {footer}
+          </div>
+        </footer>
       </div>
     </div>
   );
