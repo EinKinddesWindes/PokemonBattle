@@ -1,0 +1,9 @@
+{
+  // This project lints with ESLint and formats with Prettier, not with the global Oxc setup
+  "oxc.enable.oxlint": false,
+  "[javascript][javascriptreact][json][jsonc][css][html][markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // eslint.config.js and the ESLint package live in Frontend
+  "eslint.workingDirectories": ["./Frontend"]
+}
