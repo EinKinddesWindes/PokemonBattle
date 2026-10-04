@@ -8,22 +8,22 @@ export default function HPBar({ currentHP, maxHP }) {
   return (
     <div className="flex flex-col items-center gap-1.5">
       <div className="flex items-center gap-1.5">
-        <img src={HeartIcon} alt="HP" className="size-6 sm:size-7" />
+        <img src={HeartIcon} alt="HP" className="size-7" />
         <span
-          className="font-pixel text-sm font-bold text-white sm:text-base"
+          className="font-pixel text-base font-bold text-white"
           style={{
             textShadow:
-              '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 0 0 #000, 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000',
+              '-0.0625em -0.0625em 0 #000, 0.0625em -0.0625em 0 #000, -0.0625em 0.0625em 0 #000, 0.0625em 0.0625em 0 #000, -0.125em 0 0 #000, 0.125em 0 0 #000, 0 -0.125em 0 #000, 0 0.125em 0 #000',
           }}>
           {currentHP}
         </span>
       </div>
       <div
-        className="min-w-20 border-2 border-black bg-[#303030] p-0.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)] sm:min-w-24"
+        className="min-w-24 border-2 border-black bg-[#303030] p-0.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)]"
         style={{ imageRendering: 'pixelated' }}>
-        <div className="h-3 w-full bg-[#181818] sm:h-4">
+        <div className="h-4 w-full bg-[#181818]">
           <div
-            className={`h-3 transition-all duration-300 ease-out sm:h-4 ${barColor}`}
+            className={`h-4 transition-all duration-300 ease-out ${barColor}`}
             style={{
               width: `${percentage}%`,
               boxShadow: 'inset 0 -2px 0 rgba(0,0,0,0.3), inset 0 2px 0 rgba(255,255,255,0.2)',

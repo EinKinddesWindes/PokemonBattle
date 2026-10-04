@@ -13,14 +13,14 @@ const sizes = {
   sm: {
     container: 'p-1',
     icon: 'text-sm',
-    label: 'text-[9px]',
+    label: 'text-[0.5625rem]',
     value: 'text-xs min-w-6',
     bar: 'h-1.5 mt-0.5',
   },
   md: {
     container: 'p-1.5',
     icon: 'text-base',
-    label: 'text-[10px]',
+    label: 'text-xs',
     value: 'text-sm min-w-7',
     bar: 'h-2 mt-1',
   },

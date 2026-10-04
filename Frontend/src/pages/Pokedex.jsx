@@ -32,7 +32,7 @@ export default function Pokedex() {
   const isSelectingPlayer = player === 'myPokemon';
 
   return (
-    <div className="min-h-screen bg-slate-800">
+    <div className="min-h-screen bg-slate-800 p-4">
       <div className="mx-auto max-w-7xl">
         <header className="mb-4 sm:mb-6">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
