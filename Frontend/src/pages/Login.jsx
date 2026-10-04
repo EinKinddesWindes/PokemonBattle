@@ -55,32 +55,35 @@ export default function Login() {
           </button>
         </div>
       ) : !loaded ? (
-        <div className="flex w-full max-w-md flex-col items-center justify-center px-4">
-          <div className="relative h-6 w-full overflow-hidden rounded-lg bg-gray-300 shadow-inner sm:h-8">
-            <div
-              className="absolute inset-y-0 left-0 bg-linear-to-r from-blue-400 to-blue-600 transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
+        // An awake server answers within a second, so only show the loader once it's clearly still asleep
+        secondsWaited >= 1 && (
+          <div className="flex w-full max-w-md flex-col items-center justify-center px-4">
+            <div className="relative h-6 w-full overflow-hidden rounded-lg bg-gray-300 shadow-inner sm:h-8">
+              <div
+                className="absolute inset-y-0 left-0 bg-linear-to-r from-blue-400 to-blue-600 transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              />
 
-            <img
-              src={PikachuRunning}
-              alt="Loading..."
-              className="absolute h-8 w-auto sm:h-10"
-              style={{ left: `${Math.min(progress, 95)}%`, top: '50%', transform: 'translate(-50%, -60%)' }}
-            />
-          </div>
+              <img
+                src={PikachuRunning}
+                alt="Loading..."
+                className="absolute h-8 w-auto sm:h-10"
+                style={{ left: `${Math.min(progress, 95)}%`, top: '50%', transform: 'translate(-50%, -60%)' }}
+              />
+            </div>
 
-          <p className="mt-4 text-center text-base font-bold text-gray-800 sm:text-lg md:text-xl">
-            Waking up the server...
-            <span className="ml-2 inline-block w-12 text-center">{Math.floor(progress)}%</span>
-          </p>
-
-          {secondsWaited >= 5 && (
-            <p className="mt-4 max-w-sm text-center text-sm font-semibold text-red-600 sm:text-base">
-              Sorry, but sometimes the server needs up to 10 minutes to restart. Please wait...
+            <p className="mt-4 text-center text-base font-bold text-gray-800 sm:text-lg md:text-xl">
+              Waking up the server...
+              <span className="ml-2 inline-block w-12 text-center">{Math.floor(progress)}%</span>
             </p>
-          )}
-        </div>
+
+            {secondsWaited >= 5 && (
+              <p className="mt-4 max-w-sm text-center text-sm font-semibold text-red-600 sm:text-base">
+                Sorry, but sometimes the server needs up to 10 minutes to restart. Please wait...
+              </p>
+            )}
+          </div>
+        )
       ) : (
         <div className="animate-slide-up w-full max-w-xs rounded-xl bg-white/30 p-6 backdrop-blur-md sm:max-w-sm sm:p-8 md:p-10">
           <h2 className="mb-6 text-center text-xl font-bold text-gray-900 sm:text-2xl md:text-3xl">
