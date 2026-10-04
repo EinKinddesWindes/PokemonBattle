@@ -1,4 +1,4 @@
-import HeartIcon from '../../assets/icons/heart.avif';
+import HeartIcon from '../../assets/icons/heart.svg';
 
 /**
  * Health Points bar component - Gameboy/SNES retro style
