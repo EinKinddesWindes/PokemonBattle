@@ -36,7 +36,7 @@ export default function PokemonCard({ pokemonId, size = 'md' }) {
   return (
     <div className={`w-full ${s.padding}`}>
       <div
-        className={`card relative mx-auto w-full ${s.container} rounded-3xl border-2 border-gray-400 bg-linear-to-br from-[#e8d5b7] via-[#e3c6a0] to-[#e3b47b] shadow-lg transition-transform duration-200 group-hover:scale-105 group-hover:shadow-2xl`}>
+        className={`card mx-auto w-full ${s.container} rounded-3xl border-4 border-gray-400 bg-linear-to-br from-[#e8d5b7] via-[#e3c6a0] to-[#e3b47b] shadow-lg transition-transform duration-200 group-hover:scale-105 group-hover:shadow-2xl`}>
         <div className="flex justify-center pt-4 sm:pt-6">
           <div className={`${s.image} rounded-full bg-white shadow-inner`}>
             <img
@@ -72,8 +72,6 @@ export default function PokemonCard({ pokemonId, size = 'md' }) {
             />
           </div>
         </div>
-
-        <div className="pointer-events-none absolute inset-0 rounded-3xl border-2 border-gray-400" />
       </div>
     </div>
   );
