@@ -22,17 +22,14 @@ const typeColors = {
   Ice: 'bg-cyan-400',
 };
 
-export default function TypeBadge({ type, size = 'md' }) {
-  const bgColor = typeColors[type] || 'bg-gray-400';
+const sizes = {
+  sm: 'px-2 py-0.5 text-xs',
+  md: 'px-3 py-1 text-sm sm:text-base',
+};
 
-  const sizes = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm sm:text-base',
-    lg: 'px-4 py-1.5 text-base sm:text-lg',
-  };
-
+export default function TypeBadge({ type, size }) {
   return (
-    <span className={`inline-block rounded-full font-bold text-white shadow-sm select-none ${bgColor} ${sizes[size]}`}>
+    <span className={`inline-block rounded-full font-bold text-white shadow-sm ${typeColors[type]} ${sizes[size]}`}>
       {type}
     </span>
   );

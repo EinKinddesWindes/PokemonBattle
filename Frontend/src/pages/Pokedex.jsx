@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 
 import PokemonCard from '../components/PokemonCard';
-import { PokemonContext } from '../context/PokemonContext';
+import { PokemonContext } from '../PokemonContext';
 
 /**
  * Pokedex page - Browse and select Pokemon from the full roster
@@ -60,12 +60,12 @@ export default function Pokedex() {
                 placeholder="Search Pokemon..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="input input-bordered w-full bg-white/90 text-gray-900 placeholder:text-gray-500 sm:w-48 md:w-64"
+                className="input w-full bg-white/90 text-gray-900 placeholder:text-gray-500 sm:w-48 md:w-64"
               />
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="select select-bordered w-full bg-white/90 text-gray-900 sm:w-36">
+                className="select w-full bg-white/90 text-gray-900 sm:w-36">
                 <option value="">All Types</option>
                 {allTypes.map((type) => (
                   <option key={type} value={type}>
@@ -103,7 +103,7 @@ export default function Pokedex() {
                   key={pokemon.id}
                   className="w-[calc(50%-0.5rem)] sm:w-auto"
                   onClick={() => handleCardClick(pokemon.id)}>
-                  <PokemonCard pokemonId={pokemon.id} size="sm" showStats={true} playHoverSound={true} />
+                  <PokemonCard pokemonId={pokemon.id} size="sm" playHoverSound />
                 </div>
               ))}
             </div>
@@ -124,26 +124,16 @@ function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 300);
-    };
-
+    const toggleVisibility = () => setIsVisible(window.scrollY > 300);
     window.addEventListener('scroll', toggleVisibility);
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   if (!isVisible) return null;
 
   return (
     <button
-      onClick={scrollToTop}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       className="fixed right-4 bottom-4 z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-slate-700 text-white shadow-lg transition-transform hover:scale-110 hover:bg-slate-600 active:scale-95 sm:h-14 sm:w-14"
       aria-label="Scroll to top">
       <span className="text-xl sm:text-2xl">↑</span>

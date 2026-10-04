@@ -14,7 +14,7 @@ _Note: The backend is hosted on Render's free tier, so the first load might take
 
 ## Tech Stack
 
-**Frontend:** React 19, Tailwind CSS 4, DaisyUI 5, Vite  
+**Frontend:** React 19, React Router 8, Tailwind CSS 4, DaisyUI 5, Vite 8  
 **Backend:** Node.js, Express 5  
 **Deployed:** Netlify (frontend) + Render (backend)
 
@@ -32,17 +32,20 @@ bun install
 bun run dev
 ```
 
+The frontend talks to the deployed backend by default. To use your local one, start it with `VITE_API_URL=http://localhost:3000 bun run dev`.
+
+Backend tests: `cd Backend && bun run test`
+
 ## Project Structure
 
 ```txt
 Backend/
-├── controllers/   # Handles the requests
-├── routes/        # API endpoints
-├── models/        # Data stuff
-└── app.js         # Express server
+├── app.js             # Express server + /pokemon routes
+└── pokemondata.json   # The Pokemon roster
 
-Frontend/
-├── pages/         # Login, Arena, Battle, Pokedex
-├── components/    # Pokemon cards, images
-└── context/       # Global state (who's fighting who)
+Frontend/src/
+├── pages/             # Login, Arena, Battle, Pokedex
+├── components/        # Pokemon card + retro UI bits
+├── App.jsx            # Routes + global state (who's fighting who)
+└── pokemon.js         # Sprite/cry URLs, random picks
 ```
