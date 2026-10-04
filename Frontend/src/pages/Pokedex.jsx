@@ -20,16 +20,13 @@ export default function Pokedex() {
     return matchesSearch && matchesType;
   });
 
+  const isSelectingPlayer = player === 'myPokemon';
+
   const handleCardClick = (id) => {
-    if (player === 'myPokemon') {
-      setPlayerPokemonId(id);
-    } else if (player === 'opponent') {
-      setOpponentPokemonId(id);
-    }
+    if (isSelectingPlayer) setPlayerPokemonId(id);
+    else setOpponentPokemonId(id);
     navigate('/arena');
   };
-
-  const isSelectingPlayer = player === 'myPokemon';
 
   return (
     <div className="min-h-screen bg-slate-800 p-4">

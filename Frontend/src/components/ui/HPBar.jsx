@@ -1,7 +1,7 @@
 import HeartIcon from '../../assets/icons/heart.svg';
 
 export default function HPBar({ currentHP, maxHP }) {
-  const percentage = Math.max(0, Math.min(100, (currentHP / maxHP) * 100));
+  const percentage = (currentHP / maxHP) * 100;
   // Gameboy green / yellow / red
   const barColor = percentage > 50 ? 'bg-[#88c070]' : percentage > 25 ? 'bg-[#f8d858]' : 'bg-[#e85048]';
 
@@ -18,9 +18,7 @@ export default function HPBar({ currentHP, maxHP }) {
           {currentHP}
         </span>
       </div>
-      <div
-        className="min-w-24 border-2 border-black bg-[#303030] p-0.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)]"
-        style={{ imageRendering: 'pixelated' }}>
+      <div className="min-w-24 border-2 border-black bg-[#303030] p-0.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)]">
         <div className="h-4 w-full bg-[#181818]">
           <div
             className={`h-4 transition-all duration-300 ease-out ${barColor}`}

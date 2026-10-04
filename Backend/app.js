@@ -25,6 +25,6 @@ app.get('/pokemon/:id/:info', (req, res) => {
   else res.sendStatus(404);
 });
 
-export default app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
