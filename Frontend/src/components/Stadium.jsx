@@ -35,9 +35,9 @@ export default function Stadium({
               attacker === 'opponent' ? 'motion-safe:animate-lunge-opponent' : attacker ? 'motion-safe:animate-hit' : ''
             }
             className={
-              battle ? 'top-[48.5%] left-[61%] starting:top-[48%] starting:left-[64%]' : 'top-[48%] left-[64%]'
+              battle ? 'top-[49%] left-[59.5%] starting:top-[48%] starting:left-[64%]' : 'top-[48%] left-[64%]'
             }
-            imgClassName="h-[7cqw]"
+            imgClassName="h-[7.5cqw]"
           />
           <Fighter
             src={backGifUrl(playerId)}
@@ -49,7 +49,7 @@ export default function Stadium({
             className={
               battle ? 'top-[58%] left-[39%] starting:top-[59.5%] starting:left-[33%]' : 'top-[59.5%] left-[33%]'
             }
-            imgClassName="h-[9.5cqw]"
+            imgClassName="h-[9cqw]"
           />
         </div>
       </div>
