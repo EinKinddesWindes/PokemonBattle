@@ -96,9 +96,7 @@ export default function Arena() {
 
           {/* Fight Button */}
           <div className="mt-auto flex justify-center pb-4 sm:pb-6 lg:pb-8">
-            <PixelButton onClick={startBattle} size="lg">
-              Fight!
-            </PixelButton>
+            <PixelButton onClick={startBattle}>Fight!</PixelButton>
           </div>
         </main>
 

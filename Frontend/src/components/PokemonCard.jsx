@@ -6,9 +6,9 @@ import {
   faShieldVirus,
   faTachometerAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { PokemonContext } from '../PokemonContext';
-import { artworkUrl, playCry } from '../pokemon';
+import { artworkUrl } from '../pokemon';
 import StatBar from './ui/StatBar';
 import TypeBadge from './ui/TypeBadge';
 
@@ -31,25 +31,15 @@ const sizes = {
  * Pokemon Card component - displays a Pokemon with its image, type, and stats
  * Fully responsive and reusable across the application
  */
-export default function PokemonCard({ pokemonId, size = 'md', showStats = true, playHoverSound = false }) {
+export default function PokemonCard({ pokemonId, size = 'md', showStats = true }) {
   const { pokemonData } = useContext(PokemonContext);
   const pokemon = pokemonData.find((p) => p.id === pokemonId);
-  const hoverTimeoutRef = useRef(null);
   const s = sizes[size];
-
-  // Don't play a pending cry after the card is gone (e.g. it was clicked)
-  useEffect(() => () => clearTimeout(hoverTimeoutRef.current), []);
-
-  const handleMouseEnter = () => {
-    if (playHoverSound) hoverTimeoutRef.current = setTimeout(() => playCry(pokemonId), 500);
-  };
 
   return (
     <div className={`w-full ${s.padding}`}>
       <div
-        className={`card relative mx-auto w-full ${s.container} cursor-pointer rounded-3xl border-2 border-gray-400 bg-linear-to-br from-[#e8d5b7] via-[#e3c6a0] to-[#e3b47b] shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-2xl`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={() => clearTimeout(hoverTimeoutRef.current)}>
+        className={`card relative mx-auto w-full ${s.container} cursor-pointer rounded-3xl border-2 border-gray-400 bg-linear-to-br from-[#e8d5b7] via-[#e3c6a0] to-[#e3b47b] shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-2xl`}>
         {/* Pokemon Image */}
         <div className="flex justify-center pt-4 sm:pt-6">
           <div className={`${s.image} rounded-full bg-white shadow-inner`}>

@@ -10,17 +10,7 @@ import PokemonCard from '../components/PokemonCard';
 import HPBar from '../components/ui/HPBar';
 import PixelButton from '../components/ui/PixelButton';
 import { PokemonContext } from '../PokemonContext';
-import { backGifUrl, frontGifUrl, playCry, randomPokemonId } from '../pokemon';
-
-const pixelDivider = (
-  <div className="relative z-20 mx-auto mb-4 flex items-center justify-center gap-1">
-    <div className="h-1 w-4 bg-yellow-400" />
-    <div className="h-1 w-2 bg-white" />
-    <div className="h-1 w-8 bg-yellow-400" />
-    <div className="h-1 w-2 bg-white" />
-    <div className="h-1 w-4 bg-yellow-400" />
-  </div>
-);
+import { backGifUrl, frontGifUrl, randomPokemonId } from '../pokemon';
 
 /**
  * Battle Screen - Where the Pokemon battle takes place
@@ -58,7 +48,6 @@ export default function BattleScreen() {
     const playerTurn = currentTurn === 'player';
     const [attacker, defender] = playerTurn ? [playerPokemon, opponentPokemon] : [opponentPokemon, playerPokemon];
     setIsAttacking(true);
-    playCry(attacker.id);
 
     setTimeout(() => {
       const useSpecialAttack = Math.random() < 0.25;
@@ -194,7 +183,7 @@ export default function BattleScreen() {
 
           {/* Attack Button - centered at bottom */}
           <div className="flex justify-center py-4">
-            <PixelButton onClick={handleFight} size="lg" disabled={isAttacking || winner !== null}>
+            <PixelButton onClick={handleFight} disabled={isAttacking || winner !== null}>
               Attack!
             </PixelButton>
           </div>
@@ -217,112 +206,19 @@ export default function BattleScreen() {
           <img src={AshKetchum} alt="Ash Ketchum" className="h-80 w-auto object-contain xl:h-96" />
         </div>
 
-        {/* Winner Modal - Retro SNES Victory Screen */}
+        {/* Winner popup */}
         {winner && (
-          <>
-            {/* Confetti behind the modal */}
-            {/* ponytail: sized once when the modal opens, add a resize listener if that ever matters */}
-            <Confetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-              recycle={true}
-              numberOfPieces={300}
-              colors={['#FFD700', '#FFA500', '#FF6347', '#00CED1', '#9370DB', '#32CD32']}
-            />
-
-            {/* Dark backdrop with blur */}
-            <div className="animate-backdrop-fade fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-md">
-              <div className="animate-slide-down-slow relative w-full max-w-sm sm:max-w-md">
-                {/* Main retro card - sharp edges, hard shadow, pixel border */}
-                <div
-                  className="relative overflow-hidden border-4 border-white bg-[#0f0f2d] p-6 sm:p-8"
-                  style={{ boxShadow: '6px 6px 0px 0px rgba(0,0,0,1), -2px -2px 0px 0px rgba(80,80,120,0.5)' }}>
-                  {/* CRT Scanline overlay */}
-                  <div
-                    className="pointer-events-none absolute inset-0 z-10 opacity-[0.07]"
-                    style={{
-                      backgroundImage:
-                        'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.8) 2px, rgba(0,0,0,0.8) 4px)',
-                    }}
-                  />
-
-                  {/* Inner pixel border accent */}
-                  <div className="pointer-events-none absolute inset-2 border-2 border-yellow-400/60" />
-
-                  {/* VICTORY! header - pixel font, solid yellow, no gradient */}
-                  <div className="relative z-20 mb-2 text-center">
-                    <h1
-                      className="font-pixel text-xl text-yellow-400 sm:text-2xl md:text-3xl"
-                      style={{ textShadow: '2px 2px 0px #b8860b, 4px 4px 0px rgba(0,0,0,0.8)' }}>
-                      VICTORY!
-                    </h1>
-                  </div>
-
-                  {/* Decorative pixel divider */}
-                  {pixelDivider}
-
-                  {/* Trophy image - pixelated rendering */}
-                  <div className="relative z-20 mx-auto mb-3 w-fit">
-                    <img
-                      src={Winner}
-                      alt="Winner!"
-                      className="relative mx-auto h-auto w-24 sm:w-28"
-                      style={{ imageRendering: 'pixelated' }}
-                    />
-                  </div>
-
-                  {/* Winner name - pixel font, solid white */}
-                  <h2
-                    className="font-pixel relative z-20 mb-1 text-center text-lg text-white sm:text-xl md:text-2xl"
-                    style={{ textShadow: '2px 2px 0px rgba(0,0,0,0.8)' }}>
-                    {winner.name.english}
-                  </h2>
-                  <p
-                    className="font-pixel relative z-20 mb-4 text-center text-xs text-yellow-400 sm:text-sm"
-                    style={{ textShadow: '1px 1px 0px rgba(0,0,0,0.8)' }}>
-                    WINS THE BATTLE!
-                  </p>
-
-                  {/* Pokemon sprite showcase - pixelated, bouncing */}
-                  <div className="relative z-20 my-4 flex justify-center">
-                    <img
-                      src={frontGifUrl(winner.id)}
-                      alt={winner.name.english}
-                      className="animate-retro-bounce h-32 w-auto sm:h-40"
-                      style={{ imageRendering: 'pixelated', transform: 'scale(1.2)' }}
-                    />
-                  </div>
-
-                  {/* Pixel divider before button */}
-                  {pixelDivider}
-
-                  {/* Retro button using PixelButton component */}
-                  <div className="relative z-20">
-                    <PixelButton onClick={returnToArena} size="md" className="w-full">
-                      <span className="animate-text-blink">{'>'}</span>
-                      &nbsp;BACK TO ARENA&nbsp;
-                      <span className="animate-text-blink">{'<'}</span>
-                    </PixelButton>
-                  </div>
-                </div>
-
-                {/* Pixel sparkle decorations at corners */}
-                <div className="animate-pixel-sparkle absolute -top-2 -left-2 h-2 w-2 bg-yellow-400" />
-                <div
-                  className="animate-pixel-sparkle absolute -top-2 -right-2 h-2 w-2 bg-white"
-                  style={{ animationDelay: '0.3s' }}
-                />
-                <div
-                  className="animate-pixel-sparkle absolute -bottom-2 -left-2 h-2 w-2 bg-white"
-                  style={{ animationDelay: '0.6s' }}
-                />
-                <div
-                  className="animate-pixel-sparkle absolute -right-2 -bottom-2 h-2 w-2 bg-yellow-400"
-                  style={{ animationDelay: '0.9s' }}
-                />
-              </div>
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <Confetti width={window.innerWidth} height={window.innerHeight} />
+            <div className="animate-slide-up rounded-lg bg-white p-10 text-center text-gray-900 shadow-lg">
+              <img src={Winner} alt="Winner" className="mx-auto mb-4 h-auto w-48" />
+              <h2 className="text-2xl font-bold">{winner.name.english} Wins!</h2>
+              <img src={frontGifUrl(winner.id)} alt={winner.name.english} className="mx-auto my-4 h-36 w-auto" />
+              <button onClick={returnToArena} className="btn btn-primary mt-4">
+                Back to Arena
+              </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

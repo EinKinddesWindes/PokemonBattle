@@ -1,6 +1,7 @@
 const baseClasses = `
   font-pixel relative inline-flex items-center justify-center cursor-pointer
   rounded-none border-4 border-white bg-red-500
+  px-8 py-4 text-xl sm:px-12 sm:py-6 sm:text-2xl md:px-16 md:py-8 md:text-4xl
   text-white font-bold
   shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
   transition-all duration-100
@@ -11,15 +12,10 @@ const baseClasses = `
   disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:brightness-100
 `;
 
-const sizes = {
-  md: 'px-6 py-3 text-base sm:px-8 sm:py-4 sm:text-lg',
-  lg: 'px-8 py-4 text-xl sm:px-12 sm:py-6 sm:text-2xl md:px-16 md:py-8 md:text-4xl',
-};
-
 /**
  * A retro pixel-art styled button component
  * Maintains the Pokemon game aesthetic with pixel corners and bold shadows
  */
-export default function PixelButton({ size, className = '', ...props }) {
-  return <button className={`${baseClasses} ${sizes[size]} ${className}`} {...props} />;
+export default function PixelButton(props) {
+  return <button className={baseClasses} {...props} />;
 }

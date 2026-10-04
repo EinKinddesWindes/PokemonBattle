@@ -103,7 +103,7 @@ export default function Pokedex() {
                   key={pokemon.id}
                   className="w-[calc(50%-0.5rem)] sm:w-auto"
                   onClick={() => handleCardClick(pokemon.id)}>
-                  <PokemonCard pokemonId={pokemon.id} size="sm" playHoverSound />
+                  <PokemonCard pokemonId={pokemon.id} size="sm" />
                 </div>
               ))}
             </div>

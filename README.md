@@ -47,5 +47,5 @@ Frontend/src/
 ├── pages/             # Login, Arena, Battle, Pokedex
 ├── components/        # Pokemon card + retro UI bits
 ├── App.jsx            # Routes + global state (who's fighting who)
-└── pokemon.js         # Sprite/cry URLs, random picks
+└── pokemon.js         # Sprite URLs, random picks
 ```
