@@ -1,0 +1,5 @@
+// The editor's oxlint checks what ESLint (bun run lint) checks: correctness rules only.
+// No shadcn theme-token rules, because this project uses daisyUI and the plain Tailwind palette.
+{
+  "plugins": ["react", "unicorn", "oxc", "import", "jsx-a11y", "promise"]
+}
