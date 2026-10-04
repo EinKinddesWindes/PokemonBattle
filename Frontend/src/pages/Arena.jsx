@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router';
 
-import AshKetchum from '../assets/images/Ash_Ketchum.png';
-import Stadium from '../assets/images/stadium1.png';
+import AshKetchum from '../assets/images/Ash_Ketchum.avif';
+import Stadium from '../assets/images/stadium1.avif';
 import PokemonCard from '../components/PokemonCard';
 import PixelButton from '../components/ui/PixelButton';
 import { PokemonContext } from '../PokemonContext';

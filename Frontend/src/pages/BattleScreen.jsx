@@ -2,10 +2,10 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import Confetti from 'react-confetti';
 import { useLocation, useNavigate } from 'react-router';
 
-import Arrow from '../assets/icons/arrow.png';
-import AshKetchum from '../assets/images/Ash_Ketchum.png';
-import Stadium from '../assets/images/stadium1.png';
-import Winner from '../assets/images/Winner.png';
+import Arrow from '../assets/icons/arrow.avif';
+import AshKetchum from '../assets/images/Ash_Ketchum.avif';
+import Stadium from '../assets/images/stadium1.avif';
+import Winner from '../assets/images/Winner.avif';
 import PokemonCard from '../components/PokemonCard';
 import HPBar from '../components/ui/HPBar';
 import PixelButton from '../components/ui/PixelButton';

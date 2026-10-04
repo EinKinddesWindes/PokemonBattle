@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import PikachuRunning from '../assets/icons/pikachu_running.gif';
-import Wallpaper from '../assets/images/wallpaper2.jpg';
+import PikachuRunning from '../assets/icons/pikachu_running.avif';
+import Wallpaper from '../assets/images/wallpaper2.avif';
 import { PokemonContext } from '../PokemonContext';
 import { randomPokemonId } from '../pokemon';
 
