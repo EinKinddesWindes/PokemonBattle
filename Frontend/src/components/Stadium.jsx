@@ -33,7 +33,7 @@ export default function Stadium({
               attacker === 'opponent' ? 'motion-safe:animate-lunge-opponent' : attacker ? 'motion-safe:animate-hit' : ''
             }
             className="top-[48%] left-[64%]"
-            imgClassName="h-[7.5cqw]"
+            imgClassName="h-[7cqw]"
           />
           <Fighter
             src={backGifUrl(playerId)}
@@ -68,7 +68,7 @@ export default function Stadium({
             <img
               src={AshKetchum}
               alt="Ash Ketchum"
-              className="pointer-events-none absolute right-full -bottom-6 -mr-16 h-72 max-w-none portrait:hidden"
+              className="pointer-events-none absolute right-full -bottom-6 h-72 max-w-none portrait:hidden"
             />
             {footer}
           </div>
