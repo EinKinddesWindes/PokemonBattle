@@ -36,13 +36,13 @@
 
   @keyframes lunge-player {
     45% {
-      transform: translate(19cqw, -5cqw);
+      transform: translate(20cqw, -4cqw);
     }
   }
 
   @keyframes lunge-opponent {
     45% {
-      transform: translate(-19cqw, 5cqw);
+      transform: translate(-20cqw, 4cqw);
     }
   }
 
