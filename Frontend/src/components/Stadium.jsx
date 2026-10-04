@@ -37,7 +37,7 @@ export default function Stadium({
             className={
               battle ? 'top-[49%] left-[59.5%] starting:top-[48%] starting:left-[64%]' : 'top-[48%] left-[64%]'
             }
-            imgClassName="h-[7.5cqw]"
+            imgClassName="h-[7cqw]"
           />
           <Fighter
             src={backGifUrl(playerId)}
@@ -49,7 +49,7 @@ export default function Stadium({
             className={
               battle ? 'top-[58%] left-[39%] starting:top-[59.5%] starting:left-[33%]' : 'top-[59.5%] left-[33%]'
             }
-            imgClassName="h-[9cqw]"
+            imgClassName="h-[9.5cqw]"
           />
         </div>
       </div>
