@@ -12,10 +12,6 @@ const baseClasses = `
   disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:brightness-100
 `;
 
-/**
- * A retro pixel-art styled button component
- * Maintains the Pokemon game aesthetic with pixel corners and bold shadows
- */
 export default function PixelButton(props) {
   return <button className={baseClasses} {...props} />;
 }

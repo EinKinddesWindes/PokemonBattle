@@ -1,6 +1,3 @@
-/**
- * Pokemon type badge component with appropriate colors for each type
- */
 const typeColors = {
   Fire: 'bg-red-500',
   Water: 'bg-blue-500',

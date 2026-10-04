@@ -2,10 +2,9 @@
 @plugin 'daisyui';
 
 @theme {
-  /* Custom breakpoint for 4K screens */
+  /* 4K screens */
   --breakpoint-3xl: 2560px;
 
-  /* Custom font family */
   --font-pixel: 'Press Start 2P', cursive;
 
   --animate-shake: shake 0.5s ease-in-out;
@@ -43,7 +42,6 @@
   }
 }
 
-/* Base styles */
 html {
   scroll-behavior: smooth;
 }
@@ -52,12 +50,11 @@ body {
   @apply min-h-screen antialiased;
 }
 
-/* Make everything non-selectable by default */
+/* Game UI: no accidental text selection, except where you type or click */
 * {
   user-select: none;
 }
 
-/* Allow selection for interactive elements */
 input,
 textarea,
 select,
@@ -67,7 +64,6 @@ a,
   user-select: auto;
 }
 
-/* Custom scrollbar for Pokemon theme */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -83,12 +79,4 @@ a,
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-red-600;
-}
-
-/* Safe area padding for mobile devices */
-.safe-area-inset {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
 }

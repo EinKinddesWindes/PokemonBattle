@@ -12,10 +12,6 @@ import PixelButton from '../components/ui/PixelButton';
 import { PokemonContext } from '../PokemonContext';
 import { backGifUrl, frontGifUrl, randomPokemonId } from '../pokemon';
 
-/**
- * Battle Screen - Where the Pokemon battle takes place
- * Features turn-based combat with HP tracking, animations, and fight log
- */
 export default function BattleScreen() {
   const navigate = useNavigate();
   const { playerPokemonId, opponentPokemonId } = useLocation().state;
@@ -35,7 +31,7 @@ export default function BattleScreen() {
 
   const winner = playerHP === 0 ? opponentPokemon : opponentHP === 0 ? playerPokemon : null;
 
-  // Auto-scroll fight log
+  // Keep the newest log entry in view
   useEffect(() => {
     logRef.current.scrollTop = logRef.current.scrollHeight;
   }, [fightLog]);
@@ -97,34 +93,22 @@ export default function BattleScreen() {
     <div
       className="fixed inset-0 overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${Stadium})` }}>
-      <div className="safe-area-inset flex h-full flex-col px-2 py-2 sm:px-4 sm:py-4">
-        {/* Main Battle Area */}
+      <div className="flex h-full flex-col">
         <main className="flex flex-1 flex-col">
-          {/* Battle Grid - Cards on sides, battlefield in center */}
           <div className="grid flex-1 grid-cols-1 gap-2 lg:grid-cols-[0.6fr_2fr_0.6fr] lg:px-16 xl:px-28 2xl:px-40">
-            {/* Player's Card - Left side (hidden on mobile) */}
             <div className="hidden items-center justify-center lg:flex">
               <PokemonCard pokemonId={playerPokemon.id} size="md" showStats={false} />
             </div>
 
-            {/* Battlefield - Center */}
             <div className="relative flex flex-1 items-center justify-center">
-              {/* Fixed aspect-ratio container for consistent GIF positioning */}
-              <div className="relative w-full max-w-md overflow-visible" style={{ aspectRatio: '16 / 10' }}>
-                {/* Opponent's Pokemon - indicator, HP, GIF */}
+              {/* Fixed aspect ratio so the % offsets below put the Pokemon in the same spot on every screen */}
+              <div className="relative w-full max-w-md" style={{ aspectRatio: '16 / 10' }}>
                 <div className="absolute flex flex-col items-center" style={{ top: '-28%', right: '-10%' }}>
-                  {/* Turn indicator - bigger */}
                   <div
                     className={`flex h-20 items-center justify-center sm:h-24 md:h-28 lg:h-32 ${currentTurn === 'opponent' ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
-                    <img
-                      src={Arrow}
-                      alt="Opponent's turn"
-                      className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32"
-                    />
+                    <img src={Arrow} alt="Opponent's turn" className="size-20 sm:size-24 md:size-28 lg:size-32" />
                   </div>
-                  {/* HP Bar */}
                   <HPBar currentHP={opponentHP} maxHP={opponentPokemon.base.HP} />
-                  {/* Pokemon GIF */}
                   <div
                     className={`mt-1 transition-transform duration-300 ${
                       isAttacking && currentTurn === 'opponent' ? '-translate-x-2 sm:-translate-x-4' : ''
@@ -137,20 +121,12 @@ export default function BattleScreen() {
                   </div>
                 </div>
 
-                {/* Player's Pokemon - indicator, HP, GIF */}
                 <div className="absolute flex flex-col items-center" style={{ top: '0%', left: '-10%' }}>
-                  {/* Turn indicator - bigger */}
                   <div
                     className={`flex h-20 items-center justify-center sm:h-24 md:h-28 lg:h-32 ${currentTurn === 'player' ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
-                    <img
-                      src={Arrow}
-                      alt="Your turn"
-                      className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32"
-                    />
+                    <img src={Arrow} alt="Your turn" className="size-20 sm:size-24 md:size-28 lg:size-32" />
                   </div>
-                  {/* HP Bar */}
                   <HPBar currentHP={playerHP} maxHP={playerPokemon.base.HP} />
-                  {/* Pokemon GIF */}
                   <div
                     className={`mt-1 transition-transform duration-300 ${
                       isAttacking && currentTurn === 'player' ? 'translate-x-2 sm:translate-x-4' : ''
@@ -165,13 +141,11 @@ export default function BattleScreen() {
               </div>
             </div>
 
-            {/* Opponent's Card - Right side (hidden on mobile) */}
             <div className="hidden items-center justify-center lg:flex">
               <PokemonCard pokemonId={opponentPokemon.id} size="md" showStats={false} />
             </div>
           </div>
 
-          {/* Mobile Pokemon Cards - shown only on smaller screens */}
           <div className="mt-2 flex justify-center gap-2 lg:hidden">
             <div className="max-w-45 flex-1">
               <PokemonCard pokemonId={playerPokemon.id} size="sm" showStats={false} />
@@ -181,7 +155,6 @@ export default function BattleScreen() {
             </div>
           </div>
 
-          {/* Attack Button - centered at bottom */}
           <div className="flex justify-center py-4">
             <PixelButton onClick={handleFight} disabled={isAttacking || winner !== null}>
               Attack!
@@ -189,7 +162,6 @@ export default function BattleScreen() {
           </div>
         </main>
 
-        {/* Fight Log - Fixed bottom-left corner */}
         <div
           ref={logRef}
           className="fixed bottom-4 left-4 z-40 h-36 w-56 overflow-y-auto rounded-lg bg-white/90 p-2 text-gray-900 shadow-lg sm:h-44 sm:w-64 sm:p-3 md:h-52 md:w-72">
@@ -201,12 +173,10 @@ export default function BattleScreen() {
           ))}
         </div>
 
-        {/* Ash Ketchum - Same position as Arena */}
         <div className="pointer-events-none fixed bottom-0 left-[15%] hidden lg:block">
           <img src={AshKetchum} alt="Ash Ketchum" className="h-80 w-auto object-contain xl:h-96" />
         </div>
 
-        {/* Winner popup */}
         {winner && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
             <Confetti width={window.innerWidth} height={window.innerHeight} />

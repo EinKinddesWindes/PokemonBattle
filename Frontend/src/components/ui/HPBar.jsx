@@ -1,8 +1,5 @@
 import HeartIcon from '../../assets/icons/heart.svg';
 
-/**
- * Health Points bar component - Gameboy/SNES retro style
- */
 export default function HPBar({ currentHP, maxHP }) {
   const percentage = Math.max(0, Math.min(100, (currentHP / maxHP) * 100));
   // Gameboy green / yellow / red
@@ -11,7 +8,7 @@ export default function HPBar({ currentHP, maxHP }) {
   return (
     <div className="flex flex-col items-center gap-1.5">
       <div className="flex items-center gap-1.5">
-        <img src={HeartIcon} alt="HP" className="h-6 w-6 sm:h-7 sm:w-7" />
+        <img src={HeartIcon} alt="HP" className="size-6 sm:size-7" />
         <span
           className="font-pixel text-sm font-bold text-white sm:text-base"
           style={{
@@ -21,7 +18,6 @@ export default function HPBar({ currentHP, maxHP }) {
           {currentHP}
         </span>
       </div>
-      {/* Retro Gameboy-style HP bar */}
       <div
         className="min-w-20 border-2 border-black bg-[#303030] p-0.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)] sm:min-w-24"
         style={{ imageRendering: 'pixelated' }}>

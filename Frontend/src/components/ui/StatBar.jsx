@@ -14,14 +14,14 @@ const sizes = {
     container: 'p-1',
     icon: 'text-sm',
     label: 'text-[9px]',
-    value: 'text-xs min-w-[24px]',
+    value: 'text-xs min-w-6',
     bar: 'h-1.5 mt-0.5',
   },
   md: {
     container: 'p-1.5',
     icon: 'text-base',
     label: 'text-[10px]',
-    value: 'text-sm min-w-[28px]',
+    value: 'text-sm min-w-7',
     bar: 'h-2 mt-1',
   },
 };
@@ -29,10 +29,6 @@ const sizes = {
 // Logarithmic scale so low stats stay visible: 5 → 0%, 255 → 100%, never below 5%
 const barWidth = (value) => Math.max((Math.log(Math.max(value, 5) / 5) / Math.log(255 / 5)) * 100, 5);
 
-/**
- * A stat bar component for displaying Pokemon statistics
- * Features icon, label, value, and progress bar
- */
 export default function StatBar({ icon, label, value, color, size }) {
   const s = sizes[size];
   const c = colorClasses[color];
