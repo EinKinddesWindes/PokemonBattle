@@ -21,7 +21,7 @@ const typeColors = {
 
 const sizes = {
   sm: 'px-2 py-0.5 text-xs',
-  md: 'px-3 py-1 text-sm sm:text-base',
+  md: 'px-3 py-1 text-base',
 };
 
 export default function TypeBadge({ type, size }) {

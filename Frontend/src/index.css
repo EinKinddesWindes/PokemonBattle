@@ -9,6 +9,10 @@
 
   --animate-shake: shake 0.5s ease-in-out;
   --animate-slide-up: slide-up 0.3s ease-out;
+  /* Run most of the way to the other Pokémon (Stadium positions) and back */
+  --animate-lunge-player: lunge-player 0.8s ease-in-out;
+  --animate-lunge-opponent: lunge-opponent 0.8s ease-in-out;
+  --animate-hit: hit 0.4s ease-in-out 0.35s;
 
   @keyframes shake {
     0%,
@@ -30,6 +34,29 @@
     }
   }
 
+  @keyframes lunge-player {
+    45% {
+      transform: translate(19cqw, -5cqw);
+    }
+  }
+
+  @keyframes lunge-opponent {
+    45% {
+      transform: translate(-19cqw, 5cqw);
+    }
+  }
+
+  @keyframes hit {
+    25%,
+    75% {
+      transform: translateX(-8%);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateX(8%);
+    }
+  }
+
   @keyframes slide-up {
     from {
       opacity: 0;
@@ -44,6 +71,19 @@
 
 html {
   scroll-behavior: smooth;
+  /* Everything is sized in rem, so big screens get a bigger UI: 16px up to 1440px wide */
+  font-size: clamp(16px, 1.111vw, 24px);
+}
+
+/* Arena and battle scale as a whole, like a game screen: they're sized in rem, so this is their zoom */
+html:has(.stage) {
+  /* 16px at 1440×900 */
+  font-size: min(1.111vw, 2vh);
+
+  @media (orientation: portrait) {
+    /* Field on top, both cards side by side below */
+    font-size: min(2.7vw, 1.45dvh);
+  }
 }
 
 body {

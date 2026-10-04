@@ -19,15 +19,16 @@ const sizes = {
     title: 'text-xs sm:text-sm',
     padding: 'p-1',
   },
+  // Arena and battle, scaled with the window there
   md: {
-    container: 'w-55 sm:w-62.5',
-    image: 'size-24 sm:size-28 md:size-32',
-    title: 'text-sm sm:text-base md:text-lg',
+    container: 'w-62.5',
+    image: 'size-32',
+    title: 'text-lg',
     padding: 'p-2',
   },
 };
 
-export default function PokemonCard({ pokemonId, size = 'md', showStats = true }) {
+export default function PokemonCard({ pokemonId, size = 'md' }) {
   const { pokemonData } = useContext(PokemonContext);
   const pokemon = pokemonData.find((p) => p.id === pokemonId);
   const s = sizes[size];
@@ -56,22 +57,20 @@ export default function PokemonCard({ pokemonId, size = 'md', showStats = true }
             ))}
           </div>
 
-          {showStats && (
-            <div className="mt-2 grid grid-cols-2 gap-1 sm:mt-3 sm:gap-1.5">
-              <StatBar icon={faHeartbeat} label="HP" value={pokemon.base.HP} color="green" size={size} />
-              <StatBar icon={faTachometerAlt} label="Speed" value={pokemon.base.Speed} color="yellow" size={size} />
-              <StatBar icon={faFistRaised} label="Atk" value={pokemon.base.Attack} color="red" size={size} />
-              <StatBar icon={faShieldAlt} label="Def" value={pokemon.base.Defense} color="blue" size={size} />
-              <StatBar icon={faMeteor} label="S-Atk" value={pokemon.base['Sp. Attack']} color="orange" size={size} />
-              <StatBar
-                icon={faShieldVirus}
-                label="S-Def"
-                value={pokemon.base['Sp. Defense']}
-                color="purple"
-                size={size}
-              />
-            </div>
-          )}
+          <div className="mt-2 grid grid-cols-2 gap-1 sm:mt-3 sm:gap-1.5">
+            <StatBar icon={faHeartbeat} label="HP" value={pokemon.base.HP} color="green" size={size} />
+            <StatBar icon={faTachometerAlt} label="Speed" value={pokemon.base.Speed} color="yellow" size={size} />
+            <StatBar icon={faFistRaised} label="Atk" value={pokemon.base.Attack} color="red" size={size} />
+            <StatBar icon={faShieldAlt} label="Def" value={pokemon.base.Defense} color="blue" size={size} />
+            <StatBar icon={faMeteor} label="S-Atk" value={pokemon.base['Sp. Attack']} color="orange" size={size} />
+            <StatBar
+              icon={faShieldVirus}
+              label="S-Def"
+              value={pokemon.base['Sp. Defense']}
+              color="purple"
+              size={size}
+            />
+          </div>
         </div>
 
         <div className="pointer-events-none absolute inset-0 rounded-3xl border-2 border-gray-400" />

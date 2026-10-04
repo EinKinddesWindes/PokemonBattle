@@ -3,14 +3,12 @@ import Confetti from 'react-confetti';
 import { useLocation, useNavigate } from 'react-router';
 
 import Arrow from '../assets/icons/arrow.avif';
-import AshKetchum from '../assets/images/Ash_Ketchum.avif';
-import Stadium from '../assets/images/stadium1.avif';
 import Winner from '../assets/images/Winner.avif';
-import PokemonCard from '../components/PokemonCard';
+import Stadium from '../components/Stadium';
 import HPBar from '../components/ui/HPBar';
 import PixelButton from '../components/ui/PixelButton';
 import { PokemonContext } from '../PokemonContext';
-import { backGifUrl, frontGifUrl, randomPokemonId } from '../pokemon';
+import { frontGifUrl, randomPokemonId } from '../pokemon';
 
 export default function BattleScreen() {
   const navigate = useNavigate();
@@ -45,6 +43,7 @@ export default function BattleScreen() {
     const [attacker, defender] = playerTurn ? [playerPokemon, opponentPokemon] : [opponentPokemon, playerPokemon];
     setIsAttacking(true);
 
+    // The hit lands when the attacker reaches the defender, halfway through the lunge (index.css)
     setTimeout(() => {
       const useSpecialAttack = Math.random() < 0.25;
       const useSpecialDefense = Math.random() < 0.25;
@@ -75,7 +74,9 @@ export default function BattleScreen() {
           </>,
         );
       }
+    }, 350);
 
+    setTimeout(() => {
       setCurrentTurn(playerTurn ? 'opponent' : 'player');
       setIsAttacking(false);
     }, 800);
@@ -89,108 +90,57 @@ export default function BattleScreen() {
     navigate('/arena');
   };
 
+  const hud = (side, hp, maxHP) => (
+    <>
+      <img
+        src={Arrow}
+        alt={side === 'player' ? 'Your turn' : "Opponent's turn"}
+        className={`size-20 transition-opacity duration-300 ${currentTurn === side ? 'opacity-100' : 'opacity-0'}`}
+      />
+      <HPBar currentHP={hp} maxHP={maxHP} />
+    </>
+  );
+
   return (
-    <div
-      className="fixed inset-0 overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${Stadium})` }}>
-      <div className="flex h-full flex-col">
-        <main className="flex flex-1 flex-col">
-          <div className="grid flex-1 grid-cols-1 gap-2 lg:grid-cols-[0.6fr_2fr_0.6fr] lg:px-16 xl:px-28 2xl:px-40">
-            <div className="hidden items-center justify-center lg:flex">
-              <PokemonCard pokemonId={playerPokemon.id} size="md" showStats={false} />
-            </div>
-
-            <div className="relative flex flex-1 items-center justify-center">
-              {/* Fixed aspect ratio so the % offsets below put the Pokemon in the same spot on every screen */}
-              <div className="relative w-full max-w-md" style={{ aspectRatio: '16 / 10' }}>
-                <div className="absolute flex flex-col items-center" style={{ top: '-28%', right: '-10%' }}>
-                  <div
-                    className={`flex h-20 items-center justify-center sm:h-24 md:h-28 lg:h-32 ${currentTurn === 'opponent' ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
-                    <img src={Arrow} alt="Opponent's turn" className="size-20 sm:size-24 md:size-28 lg:size-32" />
-                  </div>
-                  <HPBar currentHP={opponentHP} maxHP={opponentPokemon.base.HP} />
-                  <div
-                    className={`mt-1 transition-transform duration-300 ${
-                      isAttacking && currentTurn === 'opponent' ? '-translate-x-2 sm:-translate-x-4' : ''
-                    }`}>
-                    <img
-                      src={frontGifUrl(opponentPokemon.id)}
-                      alt={opponentPokemon.name.english}
-                      className="h-16 w-auto object-contain sm:h-20 md:h-24 lg:h-28"
-                    />
-                  </div>
-                </div>
-
-                <div className="absolute flex flex-col items-center" style={{ top: '0%', left: '-10%' }}>
-                  <div
-                    className={`flex h-20 items-center justify-center sm:h-24 md:h-28 lg:h-32 ${currentTurn === 'player' ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
-                    <img src={Arrow} alt="Your turn" className="size-20 sm:size-24 md:size-28 lg:size-32" />
-                  </div>
-                  <HPBar currentHP={playerHP} maxHP={playerPokemon.base.HP} />
-                  <div
-                    className={`mt-1 transition-transform duration-300 ${
-                      isAttacking && currentTurn === 'player' ? 'translate-x-2 sm:translate-x-4' : ''
-                    }`}>
-                    <img
-                      src={backGifUrl(playerPokemon.id)}
-                      alt={playerPokemon.name.english}
-                      className="h-24 w-auto object-contain sm:h-28 md:h-32 lg:h-36"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="hidden items-center justify-center lg:flex">
-              <PokemonCard pokemonId={opponentPokemon.id} size="md" showStats={false} />
-            </div>
+    <>
+      <Stadium
+        playerId={playerPokemon.id}
+        opponentId={opponentPokemon.id}
+        attacker={isAttacking ? currentTurn : null}
+        playerHud={hud('player', playerHP, playerPokemon.base.HP)}
+        opponentHud={hud('opponent', opponentHP, opponentPokemon.base.HP)}
+        header={
+          <div
+            ref={logRef}
+            className="h-24 w-md max-w-full overflow-y-auto rounded-lg bg-white/90 px-3 py-2 text-gray-900 shadow-lg">
+            <h3 className="mb-1 text-sm font-bold">Battle Log</h3>
+            {fightLog.map((log, index) => (
+              <p key={index} className="text-xs">
+                {log}
+              </p>
+            ))}
           </div>
+        }
+        footer={
+          <PixelButton onClick={handleFight} disabled={isAttacking || winner !== null}>
+            Attack!
+          </PixelButton>
+        }
+      />
 
-          <div className="mt-2 flex justify-center gap-2 lg:hidden">
-            <div className="max-w-45 flex-1">
-              <PokemonCard pokemonId={playerPokemon.id} size="sm" showStats={false} />
-            </div>
-            <div className="max-w-45 flex-1">
-              <PokemonCard pokemonId={opponentPokemon.id} size="sm" showStats={false} />
-            </div>
+      {winner && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+          <div className="animate-slide-up rounded-lg bg-white p-10 text-center text-gray-900 shadow-lg">
+            <img src={Winner} alt="Winner" className="mx-auto mb-4 h-auto w-48" />
+            <h2 className="text-2xl font-bold">{winner.name.english} Wins!</h2>
+            <img src={frontGifUrl(winner.id)} alt={winner.name.english} className="mx-auto my-4 h-36 w-auto" />
+            <button onClick={returnToArena} className="btn btn-primary mt-4">
+              Back to Arena
+            </button>
           </div>
-
-          <div className="flex justify-center py-4">
-            <PixelButton onClick={handleFight} disabled={isAttacking || winner !== null}>
-              Attack!
-            </PixelButton>
-          </div>
-        </main>
-
-        <div
-          ref={logRef}
-          className="fixed bottom-4 left-4 z-40 h-36 w-56 overflow-y-auto rounded-lg bg-white/90 p-2 text-gray-900 shadow-lg sm:h-44 sm:w-64 sm:p-3 md:h-52 md:w-72">
-          <h3 className="mb-1 text-xs font-bold sm:text-sm">Battle Log</h3>
-          {fightLog.map((log, index) => (
-            <p key={index} className="text-[10px] sm:text-xs">
-              {log}
-            </p>
-          ))}
         </div>
-
-        <div className="pointer-events-none fixed bottom-0 left-[15%] hidden lg:block">
-          <img src={AshKetchum} alt="Ash Ketchum" className="h-80 w-auto object-contain xl:h-96" />
-        </div>
-
-        {winner && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <Confetti width={window.innerWidth} height={window.innerHeight} />
-            <div className="animate-slide-up rounded-lg bg-white p-10 text-center text-gray-900 shadow-lg">
-              <img src={Winner} alt="Winner" className="mx-auto mb-4 h-auto w-48" />
-              <h2 className="text-2xl font-bold">{winner.name.english} Wins!</h2>
-              <img src={frontGifUrl(winner.id)} alt={winner.name.english} className="mx-auto my-4 h-36 w-auto" />
-              <button onClick={returnToArena} className="btn btn-primary mt-4">
-                Back to Arena
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
