@@ -24,7 +24,7 @@ export default function Stadium({
         <div
           className="@container absolute top-1/2 left-1/2 aspect-video w-[max(100cqw,177.8cqh)] -translate-1/2 bg-cover portrait:top-[62%] portrait:w-[max(125cqw,222.2cqh)]"
           style={{ backgroundImage: `url(${StadiumImage})` }}>
-          {/* Positions are % of the stadium image. The player comes second so it stands in front */}
+          {/* Feet in the middle of each one's quarter of the field (% of the stadium image). The player comes second so it stands in front */}
           <Fighter
             src={frontGifUrl(opponentId)}
             alt="Opponent Pokemon"
@@ -32,7 +32,7 @@ export default function Stadium({
             animation={
               attacker === 'opponent' ? 'motion-safe:animate-lunge-opponent' : attacker ? 'motion-safe:animate-hit' : ''
             }
-            className="top-[54%] left-[64%]"
+            className="top-[48%] left-[64%]"
             imgClassName="h-[7.5cqw]"
           />
           <Fighter
@@ -42,7 +42,7 @@ export default function Stadium({
             animation={
               attacker === 'player' ? 'motion-safe:animate-lunge-player' : attacker ? 'motion-safe:animate-hit' : ''
             }
-            className="top-[66%] left-[36%]"
+            className="top-[59.5%] left-[33%]"
             imgClassName="h-[9.5cqw]"
           />
         </div>
