@@ -112,7 +112,7 @@ export default function BattleScreen() {
         header={
           <div
             ref={logRef}
-            className="h-24 w-md max-w-full overflow-y-auto rounded-lg bg-white/90 px-3 py-2 text-gray-900 shadow-lg">
+            className="h-36 w-md max-w-full overflow-y-auto rounded-lg bg-white/90 px-3 py-2 text-gray-900 shadow-lg portrait:h-24">
             <h3 className="mb-1 text-sm font-bold">Battle Log</h3>
             {fightLog.map((log, index) => (
               <p key={index} className="text-xs">
