@@ -9,7 +9,7 @@
 
   --animate-shake: shake 0.5s ease-in-out;
   --animate-slide-up: slide-up 0.3s ease-out;
-  /* Run most of the way to the other Pokémon (Stadium positions) and back */
+  /* Run most of the way to the other Pokémon (Stadium battle positions) and back */
   --animate-lunge-player: lunge-player 0.8s ease-in-out;
   --animate-lunge-opponent: lunge-opponent 0.8s ease-in-out;
   --animate-hit: hit 0.4s ease-in-out 0.35s;
@@ -36,13 +36,13 @@
 
   @keyframes lunge-player {
     45% {
-      transform: translate(20cqw, -4cqw);
+      transform: translate(15cqw, -4cqw);
     }
   }
 
   @keyframes lunge-opponent {
     45% {
-      transform: translate(-20cqw, 4cqw);
+      transform: translate(-15cqw, 4cqw);
     }
   }
 

@@ -8,6 +8,7 @@ import PokemonCard from './PokemonCard';
 export default function Stadium({
   playerId,
   opponentId,
+  battle,
   attacker,
   header,
   footer,
@@ -24,7 +25,8 @@ export default function Stadium({
         <div
           className="@container absolute top-1/2 left-1/2 aspect-video w-[max(100cqw,177.8cqh)] -translate-1/2 bg-cover portrait:top-[62%] portrait:w-[max(125cqw,222.2cqh)]"
           style={{ backgroundImage: `url(${StadiumImage})` }}>
-          {/* Feet in the middle of each one's quarter of the field (% of the stadium image). The player comes second so it stands in front */}
+          {/* Feet in the middle of each one's quarter of the field (% of the stadium image). When the battle starts
+              they walk up to the edge of the Pokéball and fight from there. The player comes second so it stands in front */}
           <Fighter
             src={frontGifUrl(opponentId)}
             alt="Opponent Pokemon"
@@ -32,7 +34,9 @@ export default function Stadium({
             animation={
               attacker === 'opponent' ? 'motion-safe:animate-lunge-opponent' : attacker ? 'motion-safe:animate-hit' : ''
             }
-            className="top-[48%] left-[64%]"
+            className={
+              battle ? 'top-[48.5%] left-[61%] starting:top-[48%] starting:left-[64%]' : 'top-[48%] left-[64%]'
+            }
             imgClassName="h-[7cqw]"
           />
           <Fighter
@@ -42,7 +46,9 @@ export default function Stadium({
             animation={
               attacker === 'player' ? 'motion-safe:animate-lunge-player' : attacker ? 'motion-safe:animate-hit' : ''
             }
-            className="top-[59.5%] left-[33%]"
+            className={
+              battle ? 'top-[58%] left-[39%] starting:top-[59.5%] starting:left-[33%]' : 'top-[59.5%] left-[33%]'
+            }
             imgClassName="h-[9.5cqw]"
           />
         </div>
@@ -80,7 +86,8 @@ export default function Stadium({
 
 function Fighter({ src, alt, hud, animation, className, imgClassName }) {
   return (
-    <div className={`absolute flex -translate-x-1/2 -translate-y-full flex-col items-center gap-1 ${className}`}>
+    <div
+      className={`absolute flex -translate-x-1/2 -translate-y-full flex-col items-center gap-1 transition-[top,left] duration-1000 motion-reduce:transition-none ${className}`}>
       {hud}
       <img src={src} alt={alt} className={`w-auto ${animation} ${imgClassName}`} />
     </div>

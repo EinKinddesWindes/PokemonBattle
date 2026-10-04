@@ -106,13 +106,14 @@ export default function BattleScreen() {
       <Stadium
         playerId={playerPokemon.id}
         opponentId={opponentPokemon.id}
+        battle
         attacker={isAttacking ? currentTurn : null}
         playerHud={hud('player', playerHP, playerPokemon.base.HP)}
         opponentHud={hud('opponent', opponentHP, opponentPokemon.base.HP)}
         header={
           <div
             ref={logRef}
-            className="h-36 w-md max-w-full overflow-y-auto rounded-lg bg-white/90 px-3 py-2 text-gray-900 shadow-lg portrait:h-24">
+            className="h-36 w-sm max-w-full overflow-y-auto rounded-lg bg-white/90 px-3 py-2 text-gray-900 shadow-lg portrait:h-24">
             <h3 className="mb-1 text-sm font-bold">Battle Log</h3>
             {fightLog.map((log, index) => (
               <p key={index} className="text-xs">
