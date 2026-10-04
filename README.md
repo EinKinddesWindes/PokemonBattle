@@ -34,8 +34,6 @@ bun run dev
 
 The frontend talks to the deployed backend by default. To use your local one, start it with `VITE_API_URL=http://localhost:3000 bun run dev`.
 
-Backend tests: `cd Backend && bun run test`
-
 ## Project Structure
 
 ```txt
