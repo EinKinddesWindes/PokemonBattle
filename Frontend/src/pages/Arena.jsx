@@ -18,7 +18,7 @@ export default function Arena() {
       playerId={playerPokemonId}
       opponentId={opponentPokemonId}
       header={
-        <h1 className="rounded-xl bg-white/30 px-4 py-3 text-3xl font-bold text-gray-900 backdrop-blur-md">
+        <h1 className="frosted px-4 py-3 text-center text-3xl font-bold wrap-anywhere text-gray-900">
           Welcome, {username}!
         </h1>
       }

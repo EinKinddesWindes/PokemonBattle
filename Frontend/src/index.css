@@ -66,6 +66,11 @@
   }
 }
 
+/* The frosted glass panel behind text: login, messages, arena title, battle log and winner popup */
+@utility frosted {
+  @apply rounded-xl bg-white/70 shadow-lg backdrop-blur-lg;
+}
+
 html {
   /* Everything is sized in rem, so big screens get a bigger UI: 16px up to 1440px wide */
   font-size: clamp(16px, 1.111vw, 24px);
@@ -97,21 +102,4 @@ select,
 button,
 a {
   user-select: auto;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-gray-200;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-red-500;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-red-600;
 }
