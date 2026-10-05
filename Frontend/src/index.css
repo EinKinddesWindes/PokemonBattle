@@ -104,19 +104,7 @@ a {
   user-select: auto;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-gray-200;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-red-500;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-red-600;
+* {
+  scrollbar-color: var(--color-red-500) var(--color-gray-200);
+  scrollbar-width: thin;
 }

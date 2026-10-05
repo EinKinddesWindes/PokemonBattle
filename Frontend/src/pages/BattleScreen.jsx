@@ -37,8 +37,6 @@ export default function BattleScreen() {
   const addToFightLog = (...entries) => setFightLog((prev) => [...prev, ...entries]);
 
   const handleFight = () => {
-    if (winner || isAttacking) return;
-
     const playerTurn = currentTurn === 'player';
     const [attacker, defender] = playerTurn ? [playerPokemon, opponentPokemon] : [opponentPokemon, playerPokemon];
     setIsAttacking(true);
