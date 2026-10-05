@@ -77,11 +77,11 @@ export default function Login() {
               <span className="ml-2 inline-block w-12 text-center">{Math.floor(progress)}%</span>
             </p>
 
-            {secondsWaited >= 5 && (
-              <p className="mt-4 max-w-sm text-center text-sm font-semibold text-red-800 sm:text-base">
-                The server just needs to restart. Give it up to a minute, then you can catch 'em all!
-              </p>
-            )}
+            {/* Takes its space from the start, so the box doesn't jump when the note shows up */}
+            <p
+              className={`mt-4 max-w-sm text-center text-sm font-semibold text-red-800 sm:text-base ${secondsWaited >= 5 ? '' : 'invisible'}`}>
+              The server just needs to restart. Give it up to a minute, then you can catch 'em all!
+            </p>
           </div>
         )
       ) : (
