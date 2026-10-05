@@ -48,8 +48,8 @@ export default function Login() {
       className="fixed inset-0 flex flex-col items-center justify-center bg-cover bg-center p-4"
       style={{ backgroundImage: `url(${Wallpaper})` }}>
       {loadError ? (
-        <div className="flex max-w-sm flex-col items-center text-center">
-          <p className="text-base font-semibold text-red-600 sm:text-lg">{loadError}</p>
+        <div className="frosted flex max-w-sm flex-col items-center p-6 text-center">
+          <p className="text-base font-semibold text-red-800 sm:text-lg">{loadError}</p>
           <button onClick={() => setLoadError(null)} className="btn btn-primary mt-4">
             Try again
           </button>
@@ -57,7 +57,7 @@ export default function Login() {
       ) : !loaded ? (
         // An awake server answers within a second, so only show the loader once it's clearly still asleep
         secondsWaited >= 1 && (
-          <div className="flex w-full max-w-md flex-col items-center justify-center px-4">
+          <div className="frosted flex w-full max-w-md flex-col items-center p-6">
             <div className="relative h-6 w-full overflow-hidden rounded-lg bg-gray-300 shadow-inner sm:h-8">
               <div
                 className="absolute inset-y-0 left-0 bg-linear-to-r from-blue-400 to-blue-600 transition-all duration-300"
@@ -78,14 +78,14 @@ export default function Login() {
             </p>
 
             {secondsWaited >= 5 && (
-              <p className="mt-4 max-w-sm text-center text-sm font-semibold text-red-600 sm:text-base">
-                Sorry, but sometimes the server needs up to 10 minutes to restart. Please wait...
+              <p className="mt-4 max-w-sm text-center text-sm font-semibold text-red-800 sm:text-base">
+                Sorry, but sometimes the server needs up to a minute to restart. Please wait...
               </p>
             )}
           </div>
         )
       ) : (
-        <div className="animate-slide-up w-full max-w-xs rounded-xl bg-white/30 p-6 backdrop-blur-md sm:max-w-sm sm:p-8 md:p-10">
+        <div className="frosted animate-slide-up w-full max-w-xs p-6 sm:max-w-sm sm:p-8 md:p-10">
           <h2 className="mb-6 text-center text-xl font-bold text-gray-900 sm:text-2xl md:text-3xl">
             Welcome
             <br />

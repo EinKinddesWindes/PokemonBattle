@@ -113,7 +113,7 @@ export default function BattleScreen() {
         header={
           <div
             ref={logRef}
-            className="h-36 w-sm max-w-full overflow-y-auto rounded-lg bg-white/90 px-3 py-2 text-gray-900 shadow-lg portrait:h-24">
+            className="frosted h-36 w-sm max-w-full overflow-y-auto px-3 py-2 text-gray-900 portrait:h-24">
             <h3 className="mb-1 text-sm font-bold">Battle Log</h3>
             {fightLog.map((log, index) => (
               <p key={index} className="text-xs">
@@ -132,7 +132,7 @@ export default function BattleScreen() {
       {winner && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <Confetti width={window.innerWidth} height={window.innerHeight} />
-          <div className="animate-slide-up rounded-lg bg-white p-10 text-center text-gray-900 shadow-lg">
+          <div className="frosted animate-slide-up p-10 text-center text-gray-900">
             <img src={Winner} alt="Winner" className="mx-auto mb-4 h-auto w-48" />
             <h2 className="text-2xl font-bold">{winner.name.english} Wins!</h2>
             <img src={frontGifUrl(winner.id)} alt={winner.name.english} className="mx-auto my-4 h-36 w-auto" />

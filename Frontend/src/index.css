@@ -66,6 +66,11 @@
   }
 }
 
+/* The frosted glass panel behind text: login, messages, arena title, battle log and winner popup */
+@utility frosted {
+  @apply rounded-xl bg-white/70 shadow-lg backdrop-blur-lg;
+}
+
 html {
   /* Everything is sized in rem, so big screens get a bigger UI: 16px up to 1440px wide */
   font-size: clamp(16px, 1.111vw, 24px);
