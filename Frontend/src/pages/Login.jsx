@@ -14,24 +14,26 @@ export default function Login() {
   const navigate = useNavigate();
   const loaded = pokemonData.length > 0;
   const [secondsWaited, setSecondsWaited] = useState(0);
-  const [loadFailed, setLoadFailed] = useState(false);
+  const [loadError, setLoadError] = useState(null);
 
   // Fetch Pokemon data and tick the fake progress bar until it arrives (the free-tier server usually wakes within ~80s)
   useEffect(() => {
-    if (loaded || loadFailed) return;
+    if (loaded || loadError) return;
 
     fetch(`${API_URL}/pokemon`)
       .then((res) => res.json())
       .then((data) => {
+        // The server sends { error } instead of the list when PokéAPI is down
+        if (data.error) return setLoadError(data.error);
         setPokemonData(data);
         setPlayerPokemonId(randomPokemonId(data.length));
         setOpponentPokemonId(randomPokemonId(data.length));
       })
-      .catch(() => setLoadFailed(true));
+      .catch(() => setLoadError('Could not load the Pokémon. Please check your connection and try again.'));
 
     const interval = setInterval(() => setSecondsWaited((s) => s + 1), 1000);
     return () => clearInterval(interval);
-  }, [loaded, loadFailed, setPokemonData, setPlayerPokemonId, setOpponentPokemonId]);
+  }, [loaded, loadError, setPokemonData, setPlayerPokemonId, setOpponentPokemonId]);
 
   const progress = Math.min((secondsWaited / 80) * 100, 100);
 
@@ -45,12 +47,10 @@ export default function Login() {
     <div
       className="fixed inset-0 flex flex-col items-center justify-center bg-cover bg-center p-4"
       style={{ backgroundImage: `url(${Wallpaper})` }}>
-      {loadFailed ? (
+      {loadError ? (
         <div className="flex max-w-sm flex-col items-center text-center">
-          <p className="text-base font-semibold text-red-600 sm:text-lg">
-            Could not load the Pokémon. Please check your connection and try again.
-          </p>
-          <button onClick={() => setLoadFailed(false)} className="btn btn-primary mt-4">
+          <p className="text-base font-semibold text-red-600 sm:text-lg">{loadError}</p>
+          <button onClick={() => setLoadError(null)} className="btn btn-primary mt-4">
             Try again
           </button>
         </div>

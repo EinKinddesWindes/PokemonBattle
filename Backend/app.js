@@ -34,6 +34,7 @@ async function fetchPokemon() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query: QUERY }),
+    signal: AbortSignal.timeout(10_000),
   });
   const { data, errors } = await res.json();
   if (errors) throw new Error(errors[0].message);
@@ -51,8 +52,15 @@ async function fetchPokemon() {
     }));
 }
 
-// ponytail: fetched once at startup, so new Pokémon show up after a restart and the server won't start while PokéAPI is down
-const pokemonData = await fetchPokemon();
+// Loaded on the first request, so the server also starts while PokéAPI is down. Until it's back, every request tries again
+// ponytail: loaded once, so new Pokémon show up after a restart
+let pokemonData;
+
+app.use(async (req, res, next) => {
+  pokemonData ??= await fetchPokemon().catch((err) => console.error(`PokéAPI is down: ${err.message}`));
+  if (pokemonData) next();
+  else res.status(503).send({ error: 'The PokéAPI is down at the moment. Please try again later.' });
+});
 
 const findPokemon = (id) => pokemonData.find((p) => p.id === Number(id));
 
