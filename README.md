@@ -38,8 +38,7 @@ The frontend talks to the deployed backend by default. To use your local one, st
 
 ```txt
 Backend/
-├── app.js             # Express server + /pokemon routes
-└── pokemondata.json   # The Pokemon roster
+└── app.js             # Express server + /pokemon routes, loads the roster from PokéAPI on startup
 
 Frontend/src/
 ├── pages/             # Login, Arena, Battle, Pokedex

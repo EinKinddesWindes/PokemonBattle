@@ -1,11 +1,52 @@
 import cors from 'cors';
 import express from 'express';
-import pokemonData from './pokemondata.json' with { type: 'json' };
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+
+// PokéAPI's GraphQL endpoint returns every Pokémon in one request (the REST API would need one per Pokémon)
+const QUERY = `{
+  pokemon(where: {is_default: {_eq: true}}, order_by: {id: asc}) {
+    id
+    pokemonspecy { pokemonspeciesnames(where: {language: {name: {_eq: "en"}}}) { name } }
+    pokemontypes(order_by: {slot: asc}) { type { name } }
+    pokemonstats(order_by: {stat_id: asc}) { base_stat stat { name } }
+  }
+}`;
+
+const STATS = {
+  hp: 'HP',
+  attack: 'Attack',
+  defense: 'Defense',
+  'special-attack': 'Sp. Attack',
+  'special-defense': 'Sp. Defense',
+  speed: 'Speed',
+};
+
+const capitalize = (word) => word[0].toUpperCase() + word.slice(1);
+
+// Reshape PokéAPI's data into the format the frontend already uses
+async function fetchPokemon() {
+  const res = await fetch('https://graphql.pokeapi.co/v1beta2', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: QUERY }),
+  });
+  const { data, errors } = await res.json();
+  if (errors) throw new Error(errors[0].message);
+
+  return data.pokemon.map((p) => ({
+    id: p.id,
+    name: { english: p.pokemonspecy.pokemonspeciesnames[0].name },
+    type: p.pokemontypes.map((t) => capitalize(t.type.name)),
+    base: Object.fromEntries(p.pokemonstats.map((s) => [STATS[s.stat.name], s.base_stat])),
+  }));
+}
+
+// ponytail: fetched once at startup, so new Pokémon show up after a restart and the server won't start while PokéAPI is down
+const pokemonData = await fetchPokemon();
 
 const findPokemon = (id) => pokemonData.find((p) => p.id === Number(id));
 
