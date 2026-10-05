@@ -79,7 +79,7 @@ export default function Login() {
 
             {secondsWaited >= 5 && (
               <p className="mt-4 max-w-sm text-center text-sm font-semibold text-red-800 sm:text-base">
-                Sorry, but sometimes the server needs up to a minute to restart. Please wait...
+                The server just needs to restart. Give it up to a minute, then you can catch 'em all!
               </p>
             )}
           </div>
