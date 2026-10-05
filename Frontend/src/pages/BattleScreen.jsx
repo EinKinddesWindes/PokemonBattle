@@ -8,7 +8,7 @@ import Stadium from '../components/Stadium';
 import HPBar from '../components/ui/HPBar';
 import PixelButton from '../components/ui/PixelButton';
 import { PokemonContext } from '../PokemonContext';
-import { frontGifUrl, randomPokemonId, showArtworkOnError } from '../pokemon';
+import { frontGifUrl, randomPokemonId } from '../pokemon';
 
 export default function BattleScreen() {
   const navigate = useNavigate();
@@ -135,12 +135,7 @@ export default function BattleScreen() {
           <div className="animate-slide-up rounded-lg bg-white p-10 text-center text-gray-900 shadow-lg">
             <img src={Winner} alt="Winner" className="mx-auto mb-4 h-auto w-48" />
             <h2 className="text-2xl font-bold">{winner.name.english} Wins!</h2>
-            <img
-              src={frontGifUrl(winner.id)}
-              onError={showArtworkOnError(winner.id)}
-              alt={winner.name.english}
-              className="mx-auto my-4 h-36 w-auto"
-            />
+            <img src={frontGifUrl(winner.id)} alt={winner.name.english} className="mx-auto my-4 h-36 w-auto" />
             <button onClick={returnToArena} className="btn btn-primary mt-4">
               Back to Arena
             </button>

@@ -1,6 +1,6 @@
 import AshKetchum from '../assets/images/Ash_Ketchum.avif';
 import StadiumImage from '../assets/images/stadium1.avif';
-import { backGifUrl, frontGifUrl, showArtworkOnError } from '../pokemon';
+import { backGifUrl, frontGifUrl } from '../pokemon';
 import PokemonCard from './PokemonCard';
 
 // Arena and battle share this screen: both Pokémon face each other on the field, their cards left and right.
@@ -29,7 +29,6 @@ export default function Stadium({
               they walk up to the edge of the Pokéball and fight from there. The player comes second so it stands in front */}
           <Fighter
             src={frontGifUrl(opponentId)}
-            onError={showArtworkOnError(opponentId)}
             alt="Opponent Pokemon"
             hud={opponentHud}
             animation={
@@ -42,7 +41,6 @@ export default function Stadium({
           />
           <Fighter
             src={backGifUrl(playerId)}
-            onError={showArtworkOnError(playerId)}
             alt="Your Pokemon"
             hud={playerHud}
             animation={
@@ -86,12 +84,12 @@ export default function Stadium({
   );
 }
 
-function Fighter({ src, onError, alt, hud, animation, className, imgClassName }) {
+function Fighter({ src, alt, hud, animation, className, imgClassName }) {
   return (
     <div
       className={`absolute flex -translate-x-1/2 -translate-y-full flex-col items-center gap-1 transition-[top,left] duration-1000 motion-reduce:transition-none ${className}`}>
       {hud}
-      <img src={src} onError={onError} alt={alt} className={`w-auto ${animation} ${imgClassName}`} />
+      <img src={src} alt={alt} className={`w-auto ${animation} ${imgClassName}`} />
     </div>
   );
 }

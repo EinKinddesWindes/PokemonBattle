@@ -13,6 +13,7 @@ const QUERY = `{
     pokemonspecy { pokemonspeciesnames(where: {language: {name: {_eq: "en"}}}) { name } }
     pokemontypes(order_by: {slot: asc}) { type { name } }
     pokemonstats(order_by: {stat_id: asc}) { base_stat stat { name } }
+    pokemonsprites { sprites(path: "other.showdown") }
   }
 }`;
 
@@ -37,12 +38,17 @@ async function fetchPokemon() {
   const { data, errors } = await res.json();
   if (errors) throw new Error(errors[0].message);
 
-  return data.pokemon.map((p) => ({
-    id: p.id,
-    name: { english: p.pokemonspecy.pokemonspeciesnames[0].name },
-    type: p.pokemontypes.map((t) => capitalize(t.type.name)),
-    base: Object.fromEntries(p.pokemonstats.map((s) => [STATS[s.stat.name], s.base_stat])),
-  }));
+  // Only Pokémon with front and back GIFs (the newest ones don't have them yet) can battle. The frontend picks random
+  // ids from 1 to the number of Pokémon, so the list stops at the first gap
+  return data.pokemon
+    .filter((p) => p.pokemonsprites[0].sprites.front_default && p.pokemonsprites[0].sprites.back_default)
+    .filter((p, i) => p.id === i + 1)
+    .map((p) => ({
+      id: p.id,
+      name: { english: p.pokemonspecy.pokemonspeciesnames[0].name },
+      type: p.pokemontypes.map((t) => capitalize(t.type.name)),
+      base: Object.fromEntries(p.pokemonstats.map((s) => [STATS[s.stat.name], s.base_stat])),
+    }));
 }
 
 // ponytail: fetched once at startup, so new Pokémon show up after a restart and the server won't start while PokéAPI is down
