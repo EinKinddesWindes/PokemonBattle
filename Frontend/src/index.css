@@ -103,8 +103,3 @@ button,
 a {
   user-select: auto;
 }
-
-* {
-  scrollbar-color: var(--color-red-500) var(--color-gray-200);
-  scrollbar-width: thin;
-}
