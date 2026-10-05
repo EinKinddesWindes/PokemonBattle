@@ -95,7 +95,7 @@ export default function Login() {
         )
       ) : (
         <div className="frosted animate-slide-up w-full max-w-xs p-6 sm:max-w-sm sm:p-8 md:p-10">
-          <h2 className="mb-6 text-center text-xl font-bold text-gray-900 sm:text-2xl md:text-3xl">
+          <h2 className="mb-6 text-center text-xl font-bold wrap-anywhere text-gray-900 sm:text-2xl md:text-3xl">
             Welcome
             <br />
             {username}!
@@ -105,9 +105,14 @@ export default function Login() {
             <input
               name="username"
               required
-              maxLength={12}
               pattern=".*\S.*"
               title="Please enter your name"
+              // Like "Please fill out this field": the browser shows this on Enter and the input shakes
+              onInput={(e) =>
+                e.currentTarget.setCustomValidity(
+                  e.currentTarget.value.trim().length > 20 ? 'Your name can be at most 20 characters long' : '',
+                )
+              }
               className="input user-invalid:animate-shake w-full border-gray-300 bg-gray-100 text-lg text-gray-700 placeholder:text-gray-500/70 user-invalid:border-red-500 focus:border-red-500 sm:text-xl"
               placeholder="Enter your name"
               autoComplete="username"
