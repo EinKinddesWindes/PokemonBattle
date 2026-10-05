@@ -37,6 +37,13 @@ export default function Login() {
 
   const progress = Math.min((secondsWaited / 80) * 100, 100);
 
+  const showNote = secondsWaited >= 5;
+  const note = (
+    <p className="mt-4 max-w-sm text-center text-sm font-semibold text-red-800 sm:text-base">
+      The server just needs to restart. Give it up to a minute, then you can catch 'em all!
+    </p>
+  );
+
   const onSubmit = (e) => {
     e.preventDefault();
     setUsername(new FormData(e.currentTarget).get('username').trim());
@@ -57,31 +64,33 @@ export default function Login() {
       ) : !loaded ? (
         // An awake server answers within a second, so only show the loader once it's clearly still asleep
         secondsWaited >= 1 && (
-          <div className="frosted flex w-full max-w-md flex-col items-center p-6">
-            <div className="relative h-6 w-full overflow-hidden rounded-lg bg-gray-300 shadow-inner sm:h-8">
-              <div
-                className="absolute inset-y-0 left-0 bg-linear-to-r from-blue-400 to-blue-600 transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              />
+          <div className="w-full max-w-md">
+            <div className="frosted flex flex-col items-center p-6">
+              <div className="relative h-6 w-full overflow-hidden rounded-lg bg-gray-300 shadow-inner sm:h-8">
+                <div
+                  className="absolute inset-y-0 left-0 bg-linear-to-r from-blue-400 to-blue-600 transition-all duration-300"
+                  style={{ width: `${progress}%` }}
+                />
 
-              <img
-                src={PikachuRunning}
-                alt="Loading..."
-                className="absolute h-8 w-auto sm:h-10"
-                style={{ left: `${Math.min(progress, 95)}%`, top: '50%', transform: 'translate(-50%, -60%)' }}
-              />
+                <img
+                  src={PikachuRunning}
+                  alt="Loading..."
+                  className="absolute h-8 w-auto sm:h-10"
+                  style={{ left: `${Math.min(progress, 95)}%`, top: '50%', transform: 'translate(-50%, -60%)' }}
+                />
+              </div>
+
+              <p className="mt-4 text-center text-base font-bold text-gray-800 sm:text-lg md:text-xl">
+                Waking up the server...
+                <span className="ml-2 inline-block w-12 text-center">{Math.floor(progress)}%</span>
+              </p>
+
+              {showNote && note}
             </div>
 
-            <p className="mt-4 text-center text-base font-bold text-gray-800 sm:text-lg md:text-xl">
-              Waking up the server...
-              <span className="ml-2 inline-block w-12 text-center">{Math.floor(progress)}%</span>
-            </p>
-
-            {/* Takes its space from the start, so the box doesn't jump when the note shows up */}
-            <p
-              className={`mt-4 max-w-sm text-center text-sm font-semibold text-red-800 sm:text-base ${secondsWaited >= 5 ? '' : 'invisible'}`}>
-              The server just needs to restart. Give it up to a minute, then you can catch 'em all!
-            </p>
+            {/* Until the note shows up, its space stays free under the box. Then it moves into the box, which grows
+                into that space, so the box stays centered as a whole and the loader doesn't jump */}
+            {!showNote && <div className="invisible flex flex-col items-center px-6">{note}</div>}
           </div>
         )
       ) : (
