@@ -15,6 +15,7 @@ export default function Login() {
   const loaded = pokemonData.length > 0;
   const [secondsWaited, setSecondsWaited] = useState(0);
   const [loadError, setLoadError] = useState(null);
+  const [nameTooLong, setNameTooLong] = useState(false);
 
   // Fetch Pokemon data and tick the fake progress bar until it arrives (the free-tier server usually wakes within ~80s)
   useEffect(() => {
@@ -107,8 +108,15 @@ export default function Login() {
               required
               maxLength={20}
               pattern=".*\S.*"
-              title="Please enter your name"
-              className="input user-invalid:animate-shake w-full border-gray-300 bg-gray-100 text-lg text-gray-700 placeholder:text-gray-500/70 user-invalid:border-red-500 focus:border-red-500 sm:text-xl"
+              title="Use 1 to 20 characters"
+              // maxLength silently drops the 21st letter, so shake like for an empty name
+              onBeforeInput={(e) => {
+                const input = e.currentTarget;
+                if (input.value.length >= input.maxLength && input.selectionStart === input.selectionEnd)
+                  setNameTooLong(true);
+              }}
+              onAnimationEnd={() => setNameTooLong(false)}
+              className={`input user-invalid:animate-shake w-full border-gray-300 bg-gray-100 text-lg text-gray-700 placeholder:text-gray-500/70 user-invalid:border-red-500 focus:border-red-500 sm:text-xl ${nameTooLong ? 'animate-shake' : ''}`}
               placeholder="Enter your name"
               autoComplete="username"
             />
