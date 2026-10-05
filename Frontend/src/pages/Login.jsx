@@ -96,6 +96,7 @@ export default function Login() {
             <input
               name="username"
               required
+              maxLength={12}
               pattern=".*\S.*"
               title="Please enter your name"
               className="input user-invalid:animate-shake w-full border-gray-300 bg-gray-100 text-lg text-gray-700 placeholder:text-gray-500/70 user-invalid:border-red-500 focus:border-red-500 sm:text-xl"
